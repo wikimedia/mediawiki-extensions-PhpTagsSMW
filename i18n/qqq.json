@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"pastakhov"
+		]
+	},
+	"phptagssmw-desc": "{{desc|name=PhpTags SMW|url=http://www.mediawiki.org/wiki/Extension:PhpTags_SMW}}",
+	"phptagssmw-ext-arrays-not-installed": "@todo documentation"
+}

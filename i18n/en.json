@@ -1,0 +1,9 @@
+{
+    "@metadata": {
+        "authors": [
+            "pastakhov"
+        ]
+    },
+    "phptagssmw-desc": "@todo description",
+    "phptagssmw-ext-arrays-not-installed": "@todo error message"
+}
