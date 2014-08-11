@@ -21,9 +21,10 @@ class SMWExtArrays extends \PhpTags\GenericObject {
 		return \PhpTags\Runtime::getParser()->mExtArrays;
 	}
 
-	public static function checkArguments( $object, $method, $arguments, $expects = false ) {
+	public static function checkArguments( $object, $method, &$arguments, $expects = false ) {
 		switch ( $method ) {
 			case 'getArray':
+			case 'unsetArray':
 				$expects = array(
 					\PhpTags\Hooks::TYPE_STRING,
 					\PhpTags\Hooks::EXPECTS_EXACTLY_PARAMETERS => 1,
@@ -37,26 +38,20 @@ class SMWExtArrays extends \PhpTags\GenericObject {
 					\PhpTags\Hooks::EXPECTS_MAXIMUM_PARAMETERS => 3,
 				);
 				break;
-			case 'unsetArray':
-				$expects = array(
-					\PhpTags\Hooks::TYPE_STRING,
-					\PhpTags\Hooks::EXPECTS_EXACTLY_PARAMETERS => 1,
-				);
-				break;
 		}
 		return parent::checkArguments( $object, $method, $arguments, $expects );
 	}
 
 	public static function s_getArray( $arrayId ) {
-		return self::getExtArrays()->getArray( (string)$arrayId );
+		return self::getExtArrays()->getArray( $arrayId );
 	}
 
 	public static function s_getArrayValue( $arrayId, $index, $default = null ) {
-		return self::getExtArrays()->getArrayValue( (string)$arrayId, $index, $default );
+		return self::getExtArrays()->getArrayValue( $arrayId, $index, $default );
 	}
 
 	public static function s_unsetArray( $arrayId ) {
-		return self::getExtArrays()->unsetArray( (string)$arrayId );
+		return self::getExtArrays()->unsetArray( $arrayId );
 	}
 
 }
