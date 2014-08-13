@@ -5,5 +5,5 @@
 		]
 	},
 	"phptagssmw-desc": "{{desc|name=PhpTags SMW|url=http://www.mediawiki.org/wiki/Extension:PhpTags_SMW}}",
-	"phptagssmw-ext-arrays-not-installed": "@todo documentation"
+	"phptagssmw-ext-arrays-not-installed": "Error message when trying to use functionality from the [https://www.mediawiki.org/wiki/Extension:Arrays Arrays] extension without it being installed."
 }
