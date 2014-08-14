@@ -32,7 +32,7 @@ if ( PHPTAGS_HOOK_RELEASE != 5 ) {
 	);
 }
 
-define( 'PHPTAGS_SMW_VERSION' , '1.0.1' );
+define( 'PHPTAGS_SMW_VERSION' , '1.1.0' );
 
 // Register this extension on Special:Version
 $wgExtensionCredits['phptagssmw'][] = array(
@@ -57,7 +57,8 @@ $wgHooks['PhpTagsRuntimeFirstInit'][] = 'PhpTagsSMWInit::initializeRuntime';
 // Preparing classes for autoloading
 $wgAutoloadClasses['PhpTagsSMWInit']	= __DIR__ . '/PhpTagsSMW.init.php';
 
-$wgAutoloadClasses['PhpTagsObjects\\SMWExtArrays']			= __DIR__ . '/includes/SMWExtArrays.php';
+$wgAutoloadClasses['PhpTagsObjects\\SMWExtArrays']	= __DIR__ . '/includes/SMWExtArrays.php';
+$wgAutoloadClasses['PhpTagsObjects\\SMWExtSQI']		= __DIR__ . '/includes/SMWExtSQI.php';
 
 /**
  * Add files to phpunit test

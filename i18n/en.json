@@ -5,5 +5,6 @@
 		]
 	},
 	"phptagssmw-desc": "Objects for [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki Semantic MediaWiki]-related data access",
-	"phptagssmw-ext-arrays-not-installed": "Requires the [https://www.mediawiki.org/wiki/Extension:Arrays Arrays] extension, but it's not installed."
+	"phptagssmw-ext-arrays-not-installed": "Requires the [https://www.mediawiki.org/wiki/Extension:Arrays Arrays] extension, but it's not installed.",
+	"phptagssmw-ext-sqi-not-installed": "Requires the [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface] extension, but it's not installed."
 }

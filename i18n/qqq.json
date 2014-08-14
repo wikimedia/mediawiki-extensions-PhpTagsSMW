@@ -5,5 +5,6 @@
 		]
 	},
 	"phptagssmw-desc": "{{desc|name=PhpTags SMW|url=http://www.mediawiki.org/wiki/Extension:PhpTags_SMW}}",
-	"phptagssmw-ext-arrays-not-installed": "Error message when trying to use functionality from the [https://www.mediawiki.org/wiki/Extension:Arrays Arrays] extension without it being installed."
+	"phptagssmw-ext-arrays-not-installed": "Error message when trying to use functionality from the [https://www.mediawiki.org/wiki/Extension:Arrays Arrays] extension without it being installed.",
+	"phptagssmw-ext-sqi-not-installed": "Error message when trying to use functionality from the [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface] extension without it being installed."
 }

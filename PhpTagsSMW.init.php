@@ -6,6 +6,7 @@ class PhpTagsSMWInit {
 		\PhpTags\Hooks::setObjects(
 				array(
 					'ExtArrays' => 'SMWExtArrays',
+					'ExtSQI' => 'SMWExtSQI',
 				)
 			);
 		return true;
