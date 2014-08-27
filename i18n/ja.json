@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Shirayuki"
+		]
+	},
+	"phptagssmw-desc": "[https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki_-_cover_page_(ja) Semantic MediaWiki] 関連のデータ アクセス用のオブジェクト",
+	"phptagssmw-ext-arrays-not-installed": "[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays] 拡張機能が必要ですが、インストールされていません。",
+	"phptagssmw-ext-sqi-not-installed": "[https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface] 拡張機能が必要ですが、インストールされていません。"
+}

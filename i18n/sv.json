@@ -1,0 +1,8 @@
+{
+	"@metadata": {
+		"authors": [
+			"Lokal Profil"
+		]
+	},
+	"phptagssmw-ext-arrays-not-installed": "Kräver [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays]-tillägget, men den är inte installerad."
+}

@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Metalhead64"
+		]
+	},
+	"phptagssmw-desc": "Ergänzt Objekte für [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki_–_Startseite Semantic-MediaWiki]-bezogenen Datenzugriff",
+	"phptagssmw-ext-arrays-not-installed": "Es wird die [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays]-Erweiterung benötigt, sie ist jedoch nicht installiert.",
+	"phptagssmw-ext-sqi-not-installed": "Es wird die [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic-Query-Interface]-Erweiterung benötigt, sie ist jedoch nicht installiert."
+}

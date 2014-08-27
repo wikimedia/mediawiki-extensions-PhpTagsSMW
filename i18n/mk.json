@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"phptagssmw-desc": "Предмети за пристап до податоци поврзани со [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki Семантички МедијаВики]",
+	"phptagssmw-ext-arrays-not-installed": "Гобара додатокот [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays], но не е воспоставен.",
+	"phptagssmw-ext-sqi-not-installed": "Го бара додатокот [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Посредник за семантички барања], но не е воспоставен."
+}
