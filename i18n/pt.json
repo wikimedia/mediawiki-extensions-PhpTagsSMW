@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Vitorvicentevalente"
+		]
+	},
+	"phptagssmw-ext-arrays-not-installed": "Requer a extensão [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays], mas não está instalada.",
+	"phptagssmw-ext-sqi-not-installed": "Requer a extensão [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface], mas não está instalada."
+}
