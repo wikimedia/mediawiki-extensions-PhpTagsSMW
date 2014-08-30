@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Boxmein"
+			"Boxmein",
+			"Pikne"
 		]
 	},
-	"phptagssmw-ext-arrays-not-installed": "Nõuab [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays massiivide] laiendit, kuid seda pole paigaldatud."
+	"phptagssmw-ext-arrays-not-installed": "Nõuab tarkvaralisa [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays], kuid seda pole paigaldatud."
 }
