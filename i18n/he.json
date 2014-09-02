@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Guycn2"
+		]
+	},
+	"phptagssmw-ext-arrays-not-installed": "הרחבת ה[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays מערכים] נדרשת, אך היא אינה מותקנת.",
+	"phptagssmw-ext-sqi-not-installed": "הרחבת ה[https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface שאילתת הממשק הסימנטית] נדרשת, אך היא אינה מותקנת."
+}
