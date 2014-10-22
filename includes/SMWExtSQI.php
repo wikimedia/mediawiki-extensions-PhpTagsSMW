@@ -8,11 +8,11 @@ namespace PhpTagsObjects;
  */
 class SMWExtSQI extends \PhpTags\GenericObject {
 
-	public function m___construct() {
+	public function m___construct( $config = null ) {
 		if ( false === class_exists( '\\SQI\\SemanticQueryInterface' ) ) {
 			throw new \Exception( wfMessage( 'phptagssmw-ext-sqi-not-installed' )->text() );
 		}
-		$this->value = new \SQI\SemanticQueryInterface();
+		$this->value = new \SQI\SemanticQueryInterface( $config );
 		return true;
 	}
 
@@ -64,6 +64,13 @@ class SMWExtSQI extends \PhpTags\GenericObject {
 
 	public static function checkArguments( $object, $method, &$arguments, $expects = false ) {
 		switch ( $method ) {
+			case '__construct':
+				$expects = array(
+					\PhpTags\Hooks::TYPE_ARRAY,
+					\PhpTags\Hooks::EXPECTS_MINIMUM_PARAMETERS => 0,
+					\PhpTags\Hooks::EXPECTS_MAXIMUM_PARAMETERS => 1,
+				);
+				break;
 			case 'from':
 				$expects = array(
 					\PhpTags\Hooks::TYPE_STRING,
