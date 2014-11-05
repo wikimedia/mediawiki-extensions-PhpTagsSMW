@@ -23,14 +23,14 @@ class SMWExtArrays extends \PhpTags\GenericObject {
 
 	public static function checkArguments( $object, $method, &$arguments, $expects = false ) {
 		switch ( $method ) {
-			case 'getArray':
-			case 'unsetArray':
+			case 'getarray':
+			case 'unsetarray':
 				$expects = array(
 					\PhpTags\Hooks::TYPE_STRING,
 					\PhpTags\Hooks::EXPECTS_EXACTLY_PARAMETERS => 1,
 				);
 				break;
-			case 'getArrayValue':
+			case 'getarrayvalue':
 				$expects = array(
 					\PhpTags\Hooks::TYPE_STRING,
 					\PhpTags\Hooks::TYPE_SCALAR,

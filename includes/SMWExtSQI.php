@@ -78,7 +78,7 @@ class SMWExtSQI extends \PhpTags\GenericObject {
 					\PhpTags\Hooks::EXPECTS_MAXIMUM_PARAMETERS => 2,
 				);
 				break;
-			case 'toArray':
+			case 'toarray':
 				$expects = array(
 					\PhpTags\Hooks::EXPECTS_MAXIMUM_PARAMETERS => 1,
 				);
