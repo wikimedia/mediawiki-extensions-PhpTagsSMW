@@ -1,0 +1,101 @@
+{
+	"objects": {
+		"ExtArrays": {
+			"class": "SMWExtArrays",
+			"STATIC METHODS": {
+				"getArray": {
+					"parameters": [
+						{ "type": "string", "name": "arrayId" }
+					],
+					"return": "array",
+					"desc": "Returns the values of an array"
+				},
+				"getArrayValue": {
+					"parameters": [
+						{ "type": "string", "name": "arrayId" },
+						{ "type": "scalar", "name": "index" },
+						{ "type": "mixed", "name": "default", "default": "null" }
+					],
+					"return": "mixed",
+					"desc": "Returns the value of an array at position $index"
+				},
+				"unsetArray": {
+					"parameters": [
+						{ "type": "string", "name": "arrayId", "default": "" },
+						{ "type": "string", "name": "..." }
+					],
+					"return": "bool",
+					"desc": "This function will unset some or all defined arrays"
+				}
+			}
+		},
+		"ExtSQI": {
+			"class": "SMWExtSQI",
+			"METHODS": {
+				"__construct": {
+					"parameters": [
+						{ "type": "array", "name": "config", "default": "null" }
+					],
+					"return": "ExtSQI",
+					"desc": "Returns new ExtSQI object"
+				},
+				"from": {
+					"parameters": [
+						{ "type": "string", "name": "page" },
+						{ "type": "bool", "name": "flatResult", "default": "false" }
+					],
+					"return": "ExtSQI",
+					"desc": "Sets query limitation to specified page"
+				},
+				"condition": {
+					"parameters": [
+						{ "type": "not object", "name": "condition" },
+						{ "type": "scalar", "name": "conditionValue", "default": "null" }
+					],
+					"return": "ExtSQI",
+					"desc": "Apply some condition to query"
+				},
+				"category": {
+					"parameters": [
+						{ "type": "string", "name": "category" }
+					],
+					"return": "ExtSQI",
+					"desc": "Sets query limitation to category(ies)"
+				},
+				"printout": {
+					"parameters": [
+						{ "type": "not object", "name": "printout" }
+					],
+					"return": "ExtSQI",
+					"desc": "Adds property to be fetched and printed out, use * to print out all properties"
+				},
+				"limit": {
+					"parameters": [
+						{ "type": "int", "name": "limit" }
+					],
+					"return": "ExtSQI",
+					"desc": "Set query results limit"
+				},
+				"offset": {
+					"parameters": [
+						{ "type": "int", "name": "offset" }
+					],
+					"return": "ExtSQI",
+					"desc": "Set query results offset"
+				},
+				"count": {
+					"parameters": [],
+					"return": "int",
+					"desc": "Counts query results"
+				},
+				"toArray": {
+					"parameters": [
+						{ "type": "bool", "name": "stringifyPropValues", "default": "false" }
+					],
+					"return": "array",
+					"desc": "Main method to get query results. Converts raw semantic result to human readable array"
+				}
+			}
+		}
+	}
+}

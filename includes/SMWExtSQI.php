@@ -45,12 +45,12 @@ class SMWExtSQI extends \PhpTags\GenericObject {
 	}
 
 	public function m_limit( $limit ) {
-		$this->getSQI()->limit( $limit );
+		$this->getSQI()->limit( abs( $limit ) );
 		return $this;
 	}
 
 	public function m_offset( $offset ) {
-		$this->getSQI()->offset( $offset );
+		$this->getSQI()->offset( abs( $offset ) );
 		return $this;
 	}
 
@@ -60,51 +60,6 @@ class SMWExtSQI extends \PhpTags\GenericObject {
 
 	public function m_toArray( $stringifyPropValues = false ) {
 		return $this->getSQI()->toArray( (bool)$stringifyPropValues );
-	}
-
-	public static function checkArguments( $object, $method, &$arguments, $expects = false ) {
-		switch ( $method ) {
-			case '__construct':
-				$expects = array(
-					\PhpTags\Hooks::TYPE_ARRAY,
-					\PhpTags\Hooks::EXPECTS_MINIMUM_PARAMETERS => 0,
-					\PhpTags\Hooks::EXPECTS_MAXIMUM_PARAMETERS => 1,
-				);
-				break;
-			case 'from':
-				$expects = array(
-					\PhpTags\Hooks::TYPE_STRING,
-					\PhpTags\Hooks::EXPECTS_MINIMUM_PARAMETERS => 1,
-					\PhpTags\Hooks::EXPECTS_MAXIMUM_PARAMETERS => 2,
-				);
-				break;
-			case 'toarray':
-				$expects = array(
-					\PhpTags\Hooks::EXPECTS_MAXIMUM_PARAMETERS => 1,
-				);
-				break;
-			case 'condition':
-				$expects = array(
-					\PhpTags\Hooks::TYPE_NOT_OBJECT,
-					\PhpTags\Hooks::TYPE_NOT_OBJECT,
-				);
-				break;
-			case 'printout':
-			case 'category':
-				$expects = array(
-					\PhpTags\Hooks::TYPE_STRING,
-					\PhpTags\Hooks::EXPECTS_EXACTLY_PARAMETERS => 1,
-				);
-				break;
-			case 'limit':
-			case 'offset':
-				$expects = array(
-					\PhpTags\Hooks::TYPE_INT,
-					\PhpTags\Hooks::EXPECTS_EXACTLY_PARAMETERS => 1,
-				);
-				break;
-		}
-		return parent::checkArguments( $object, $method, $arguments, $expects );
 	}
 
 }

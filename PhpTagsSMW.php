@@ -14,25 +14,7 @@ if ( !defined('MEDIAWIKI') ) {
 	die( 'This file is an extension to MediaWiki and thus not a valid entry point.' );
 }
 
-if ( !defined( 'PHPTAGS_VERSION' ) ) {
-	die( 'ERROR: The <a href="https://www.mediawiki.org/wiki/Extension:PhpTags">extension PhpTags</a> must be installed for the extension PhpTags SMW to run!' );
-}
-
-$needVersion = '3.8.0';
-if ( version_compare( PHPTAGS_VERSION, $needVersion, '<' ) ) {
-	die(
-		'<b>Error:</b> This version of extension PhpTags SMW needs <a href="https://www.mediawiki.org/wiki/Extension:PhpTags">PhpTags</a> ' . $needVersion . ' or later.
-		You are currently using version ' . PHPTAGS_VERSION . '.<br />'
-	);
-}
-
-if ( PHPTAGS_HOOK_RELEASE != 5 ) {
-	die (
-			'<b>Error:</b> This version of extension PhpTags SMW is not compatible to current version of the PhpTags extension.'
-	);
-}
-
-define( 'PHPTAGS_SMW_VERSION' , '1.1.1' );
+const PHPTAGS_SMW_VERSION = '1.2.0';
 
 // Register this extension on Special:Version
 $wgExtensionCredits['phptagssmw'][] = array(
@@ -48,15 +30,31 @@ $wgExtensionCredits['phptagssmw'][] = array(
 $wgMessagesDirs['PhpTagsSMW'] =				__DIR__ . '/i18n';
 $wgExtensionMessagesFiles['PhpTagsSMW'] =	__DIR__ . '/PhpTagsSMW.i18n.php';
 
-// Specify the function that will initialize the parser function.
 /**
  * @codeCoverageIgnore
  */
-$wgHooks['PhpTagsRuntimeFirstInit'][] = 'PhpTagsSMWInit::initializeRuntime';
+$wgHooks['ParserFirstCallInit'][] = function() {
+	if ( !defined( 'PHPTAGS_VERSION' ) ) {
+	throw new MWException( "\n\nYou need to have the PhpTags extension installed in order to use the PhpTags SMW extension." );
+	}
+	$needVersion = '4.0.2';
+	if ( version_compare( PHPTAGS_VERSION, $needVersion, '<' ) ) {
+		throw new MWException( "\n\nThis version of the PhpTags SMW extension requires the PhpTags extension $needVersion or above.\n You have " . PHPTAGS_VERSION . ". Please update it." );
+	}
+	if ( PHPTAGS_HOOK_RELEASE != 6 ) {
+		throw new MWException( "\n\nThis version of the PhpTags SMW extension is outdated and not compatible with current version of the PhpTags extension.\n Please update it." );
+	}
+	return true;
+};
+
+/**
+ * @codeCoverageIgnore
+ */
+$wgHooks['PhpTagsRuntimeFirstInit'][] = function() {
+	\PhpTags\Hooks::addJsonFile( __DIR__ . '/PhpTagsSMW.json' );
+};
 
 // Preparing classes for autoloading
-$wgAutoloadClasses['PhpTagsSMWInit']	= __DIR__ . '/PhpTagsSMW.init.php';
-
 $wgAutoloadClasses['PhpTagsObjects\\SMWExtArrays']	= __DIR__ . '/includes/SMWExtArrays.php';
 $wgAutoloadClasses['PhpTagsObjects\\SMWExtSQI']		= __DIR__ . '/includes/SMWExtSQI.php';
 
