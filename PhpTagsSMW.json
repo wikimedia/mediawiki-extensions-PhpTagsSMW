@@ -96,6 +96,37 @@
 					"desc": "Main method to get query results. Converts raw semantic result to human readable array"
 				}
 			}
+		},
+		"WSemanticData": {
+			"class": "SMWWSemanticData",
+			"STATIC METHODS": {
+				"addValue": {
+					"parameters": [
+						{ "type": "string", "name": "propertyName" },
+						{ "type": "string", "name": "valueString" }
+					],
+					"desc": "Add a value for a property to the current page"
+				}
+			}
+		},
+		"WSemanticProperty": {
+			"class": "SMWWSemanticProperty",
+			"STATIC METHODS": {
+				"getIdForName": {
+					"parameters": [
+						{ "type": "string", "name": "name" }
+					],
+					"return": "string",
+					"desc": "Get the property ID (special property ID or page name with underscores) for the property named by $name"
+				},
+				"getNameForId": {
+					"parameters": [
+						{ "type": "string", "name": "id" }
+					],
+					"return": "string",
+					"desc": "Get the property name for the property identified by $id (special property ID beginning with an underscore, or page name)"
+				}
+			}
 		}
 	}
 }

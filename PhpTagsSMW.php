@@ -6,6 +6,7 @@
  * @defgroup PhpTags
  * @ingroup Extensions
  * @author Pavel Astakhov <pastakhov@yandex.ru>
+ * @author Joel K. Pettersson <joelkpettersson@gmail.com>
  * @licence GNU General Public Licence 2.0 or later
  */
 
@@ -14,21 +15,24 @@ if ( !defined('MEDIAWIKI') ) {
 	die( 'This file is an extension to MediaWiki and thus not a valid entry point.' );
 }
 
-const PHPTAGS_SMW_VERSION = '1.2.0';
+const PHPTAGS_SMW_VERSION = '1.3.0';
 
 // Register this extension on Special:Version
-$wgExtensionCredits['phptagssmw'][] = array(
-	'path'				=> __FILE__,
-	'name'				=> 'PhpTags SMW',
-	'version'			=> PHPTAGS_SMW_VERSION,
-	'url'				=> 'https://www.mediawiki.org/wiki/Extension:PhpTags_SMW',
-	'author'			=> '[https://www.mediawiki.org/wiki/User:Pastakhov Pavel Astakhov]',
-	'descriptionmsg'	=> 'phptagssmw-desc'
+$wgExtensionCredits['phptags'][] = array(
+	'path'           => __FILE__,
+	'name'           => 'PhpTags SMW',
+	'version'        => PHPTAGS_SMW_VERSION,
+	'url'            => 'https://www.mediawiki.org/wiki/Extension:PhpTags_SMW',
+	'author'         => array( '[https://www.mediawiki.org/wiki/User:Pastakhov Pavel Astakhov]', '[https://www.mediawiki.org/wiki/User:JoelKP Joel K. Pettersson]' ),
+	'descriptionmsg' => 'phptagssmw-desc',
+	'license-name'   => 'GPL-2.0+',
 );
 
-// Allow translations for this extension
-$wgMessagesDirs['PhpTagsSMW'] =				__DIR__ . '/i18n';
-$wgExtensionMessagesFiles['PhpTagsSMW'] =	__DIR__ . '/PhpTagsSMW.i18n.php';
+// Register message files
+$wgMessagesDirs['PhpTagsSMW'] = __DIR__ . '/i18n';
+$wgExtensionMessagesFiles['PhpTagsSMW'] = __DIR__ . '/PhpTagsSMW.i18n.php';
+
+// Register hooks
 
 /**
  * @codeCoverageIgnore
@@ -50,13 +54,20 @@ $wgHooks['ParserFirstCallInit'][] = function() {
 /**
  * @codeCoverageIgnore
  */
-$wgHooks['PhpTagsRuntimeFirstInit'][] = function() {
-	\PhpTags\Hooks::addJsonFile( __DIR__ . '/PhpTagsSMW.json' );
-};
+$wgHooks['PhpTagsRuntimeFirstInit'][] = 'PhpTagsSMWHooks::onPhpTagsRuntimeFirstInit';
+$wgHooks['SMWStore::updateDataBefore'][] = 'PhpTagsSMWHooks::onSMWUpdateDataBefore';
 
-// Preparing classes for autoloading
-$wgAutoloadClasses['PhpTagsObjects\\SMWExtArrays']	= __DIR__ . '/includes/SMWExtArrays.php';
-$wgAutoloadClasses['PhpTagsObjects\\SMWExtSQI']		= __DIR__ . '/includes/SMWExtSQI.php';
+// Register classes for autoloading
+$wgAutoloadClasses['PhpTagsSMWHooks'] = __DIR__ . '/PhpTagsSMW.hooks.php';
+
+$wgAutoloadClasses['PhpTagsObjects\\SMWExtArrays'] =
+	__DIR__ . '/includes/SMWExtArrays.php';
+$wgAutoloadClasses['PhpTagsObjects\\SMWExtSQI'] =
+	__DIR__ . '/includes/SMWExtSQI.php';
+$wgAutoloadClasses['PhpTagsObjects\\SMWWSemanticData'] =
+	__DIR__ . '/includes/SMWWSemanticData.php';
+$wgAutoloadClasses['PhpTagsObjects\\SMWWSemanticProperty'] =
+	__DIR__ . '/includes/SMWWSemanticProperty.php';
 
 /**
  * Add files to phpunit test
