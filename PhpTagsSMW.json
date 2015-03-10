@@ -117,14 +117,22 @@
 						{ "type": "string", "name": "name" }
 					],
 					"return": "string",
-					"desc": "Get the property ID (special property ID or page name with underscores) for the property named by $name"
+					"desc": "Get property ID (special property ID or page name with underscores) for property $name"
 				},
 				"getNameForId": {
 					"parameters": [
-						{ "type": "string", "name": "id" }
+						{ "type": "string", "name": "id" },
+						{ "type": "bool", "name": "getIdIfNameless", "default": "true" }
 					],
 					"return": "string",
-					"desc": "Get the property name for the property identified by $id (special property ID beginning with an underscore, or page name)"
+					"desc": "Get property name for property $id (special property ID beginning with an underscore, or page name)"
+				},
+				"normalize": {
+					"parameters": [
+						{ "type": "string", "name": "nameOrId" }
+					],
+					"return": "string",
+					"desc": "Normalize property $nameOrId string, making it look good for display"
 				}
 			}
 		}

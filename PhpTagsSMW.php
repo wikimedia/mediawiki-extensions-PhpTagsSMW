@@ -3,6 +3,7 @@
  * Main entry point for the PhpTags SMW extension.
  *
  * @link https://www.mediawiki.org/wiki/Extension:PhpTags_SMW Documentation
+ * @file PhpTagsSMW.php
  * @defgroup PhpTags
  * @ingroup Extensions
  * @author Pavel Astakhov <pastakhov@yandex.ru>
@@ -15,7 +16,7 @@ if ( !defined('MEDIAWIKI') ) {
 	die( 'This file is an extension to MediaWiki and thus not a valid entry point.' );
 }
 
-const PHPTAGS_SMW_VERSION = '1.3.0';
+const PHPTAGS_SMW_VERSION = '1.3.1';
 
 // Register this extension on Special:Version
 $wgExtensionCredits['phptags'][] = array(
