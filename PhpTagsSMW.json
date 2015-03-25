@@ -102,22 +102,58 @@
 			"STATIC METHODS": {
 				"addValue": {
 					"parameters": [
-						{ "type": "string", "name": "propertyName" },
-						{ "type": "string", "name": "valueString" }
+						{ "type": "string", "name": "property" },
+						{ "type": "not object", "name": "value" }
 					],
-					"desc": "Add a value for a property to the current page"
+					"desc": "Add a value for a property to the current page. $value can be scalar, or an array of scalar|null (which is converted into a record value string)"
+				},
+				"addValues": {
+					"parameters": [
+						{ "type": "array", "name": "valueAssignments" }
+					],
+					"desc": "Add property values to the current page. $valueAssignments should be an array of 'property' => array( value, ... ) entries. Single values can also be given directly instead of in inner arrays, except when using the array format for a record value"
+				},
+				"addSubobject": {
+					"parameters": [
+						{ "type": "array", "name": "valueAssignments" },
+						{ "type": "string", "name": "id", "default": "''" },
+						{ "type": "string", "name": "linkbackProperty", "default": "''" }
+					],
+					"desc": "Add a subobject to the current page. $valueAssignments has the same format as in addValues(). $id can optionally name the subobject. $linkbackProperty can optionally name a property to add with the page name"
 				}
 			}
 		},
 		"WSemanticProperty": {
 			"class": "SMWWSemanticProperty",
 			"STATIC METHODS": {
+				"normalize": {
+					"parameters": [
+						{ "type": "string", "name": "property" }
+					],
+					"return": "string",
+					"desc": "Normalize $property string, making it look good for display"
+				},
+				"findId": {
+					"parameters": [
+						{ "type": "string", "name": "property" }
+					],
+					"return": "string",
+					"desc": "Get property ID (special property ID or page name with underscores) for $property, or empty string if none"
+				},
+				"findName": {
+					"parameters": [
+						{ "type": "string", "name": "property" },
+						{ "type": "bool", "name": "getIdIfNameless", "default": "false" }
+					],
+					"return": "string",
+					"desc": "Get property name (special property label or normalized page name) for $property, or empty string if none"
+				},
 				"getIdForName": {
 					"parameters": [
 						{ "type": "string", "name": "name" }
 					],
 					"return": "string",
-					"desc": "Get property ID (special property ID or page name with underscores) for property $name"
+					"desc": "Deprecated - use findId() instead."
 				},
 				"getNameForId": {
 					"parameters": [
@@ -125,16 +161,17 @@
 						{ "type": "bool", "name": "getIdIfNameless", "default": "true" }
 					],
 					"return": "string",
-					"desc": "Get property name for property $id (special property ID beginning with an underscore, or page name)"
-				},
-				"normalize": {
-					"parameters": [
-						{ "type": "string", "name": "nameOrId" }
-					],
-					"return": "string",
-					"desc": "Normalize property $nameOrId string, making it look good for display"
+					"desc": "Deprecated - use findName() instead."
 				}
 			}
+		}
+	},
+	"constants": {
+		"PHPTAGS_SMW_VERSION" : {
+			"desc": "The current version of the PhpTags SMW extension as a string",
+			"type": "string",
+			"example": "1.4.0",
+			"link": "https://www.mediawiki.org/wiki/Extension:PhpTags_SMW"
 		}
 	}
 }

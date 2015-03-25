@@ -13,6 +13,20 @@ namespace PhpTagsObjects;
 class SMWWSemanticProperty extends \PhpTags\GenericObject {
 
 	/**
+	 * Extra aliases for predefined ("special") property IDs. (These
+	 * are only used when looking up IDs - they are not used as labels
+	 * when looking up names.)
+	 *
+	 * @var array $extraAliases Array of string => string entries
+	 */
+	private static $extraAliases = array(
+		// Recognized by SMW's #subobject parser function. In
+		// PhpTags SMW, simply recognize it universally instead of
+		// making subobjects a special case.
+		'@sortkey' => '_SKEY'
+	);
+
+	/**
 	 * Remove the property namespace prefix if present in the given
 	 * string. Looks for both the canonical and localized versions of
 	 * the prefix. The check is case-insensitive.
@@ -56,19 +70,85 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	}
 
 	/**
-	 * Check whether the predefined property given by an ID exists.
-	 * The ID must be normalized.
+	 * Normalize the given property string. Returns a "cleaned up"
+	 * copy suitable for printing, and also for doing a name <-> ID
+	 * lookup.
 	 *
-	 * @param string $id
-	 * @return boolean
+	 * Whitespace is trimmed, and the property namespace prefix is
+	 * removed if present. Unless the name begins with an underscore,
+	 * underscores are turned into spaces (and the first character is
+	 * capitalized, if property page names are case-insensitive). If
+	 * the name begins with an underscore, spaces are instead replaced
+	 * by underscores following trimming and prefix removal.
+	 *
+	 * @param string $property
+	 * @return string
 	 */
-	private static function isValidPredefined( $id ) {
-		return \SMWDIProperty::getPredefinedPropertyTypeId( $id ) !== '';
+	public static function normalize( $property ) {
+		$property = trim( $property );
+		$property = self::stripPropertyNamespace( $property );
+		if ( $property === '' ) {
+			return '';
+		}
+		if ( $property[0] === '_' ) {
+			return str_replace( ' ', '_', $property );
+		} else {
+			$property = self::capitalizeName( $property );
+			return str_replace( '_', ' ', $property );
+		}
 	}
 
 	/**
-	 * Return property ID corresponding to the given name, if the ID
-	 * exists. The name can be either one of:
+	 * Return predefined/special property ID for a normalized property
+	 * label or alias. If none is found, false will be returned.
+	 *
+	 * @param string $name Normalized property label or alias
+	 * @return string|false The property ID, or false
+	 */
+	public static function getIdForLabelOrAlias( $name ) {
+		$registry = \SMW\PropertyRegistry::getInstance();
+		$id = $registry->findPropertyIdByLabel( $name );
+		if ( $id !== false ) {
+			return $id;
+		}
+		// Check extra aliases
+		if ( isset( self::$extraAliases[$name] ) ) {
+			return self::$extraAliases[$name];
+		}
+		return false;
+	}
+
+	/**
+	 * Return property label for a normalized predefined/special
+	 * property ID. If none is found, false will be returned.
+	 *
+	 * @param string $name Normalized property label or alias
+	 * @return string|false The property ID, or false
+	 */
+	public static function getLabelForId( $id ) {
+		$registry = \SMW\PropertyRegistry::getInstance();
+		$label = $registry->findPropertyLabelById( $id );
+		if ( $label !== '' ) {
+			return $label;
+		}
+		return false;
+	}
+
+	/**
+	 * Check whether the given predefined/special property ID is
+	 * valid. The string must be normalized.
+	 *
+	 * @param string $id Normalized predefined/special property ID
+	 * @return boolean
+	 */
+	public static function isValidPredefinedId( $id ) {
+		$registry = \SMW\PropertyRegistry::getInstance();
+		return $registry->isKnownPropertyId( $id );
+	}
+
+	/**
+	 * Return property ID for the given property string, if a valid
+	 * property. The property string can be:
 	 * - A label or alias for a predefined ("special") property. The
 	 *   corresponding ID will be returned.
 	 * - Any other name not beginning with an underscore is regarded
@@ -91,143 +171,114 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 * @param string $name
 	 * @return string The property ID, or an empty string
 	 */
-	public static function getIdForName( $name ) {
-		$name = trim( $name );
-		$name = self::stripPropertyNamespace( $name );
-		if ( $name === '' ) {
+	public static function findId( $property ) {
+		$property = self::normalize( $property );
+		if ( $property === '' ) {
 			return '';
 		}
-		if ( $name[0] === '_' ) {
-			// Predefined property ID given - normalize to
-			// DbKey form and check if the property exists
-			$id = str_replace( ' ', '_', $name );
-			if ( self::isValidPredefined( $id ) === true ) {
-				return $id;
+		if ( $property[0] === '_' ) {
+			// Predefined property ID given - check if the
+			// property exists
+			if ( self::isValidPredefinedId( $property ) ) {
+				return $property;
 			}
 			return '';
 		}
-		// Normalize to title string form and lookup
-		$name = self::capitalizeName( $name );
-		$name = str_replace( '_', ' ', $name );
-		$id = \SMWDIProperty::findPropertyID( $name );
+		$id = self::getIdForLabelOrAlias( $property );
 		if ( $id !== false ) {
 			return $id;
 		}
-		// SMW considers it user-defined - a property page name
-		return str_replace( ' ', '_', $name );
+		// User-defined, i.e. a property page name
+		return str_replace( ' ', '_', $property );
 	}
 
 	/**
-	 * Return property name corresponding to the given ID, if the ID
-	 * is valid. The ID can be:
+	 * Return property name for the given property string, if a valid
+	 * property and a name exists. The property string can be:
 	 * - A predefined ("special") property ID. The label for the
-	 *   property will be returned if it exists. If not, then as an
-	 *   optional fallback (the default), the ID can be returned
-	 *   (normalized as an ID) instead of an empty string.
+	 *   property will be returned if the property exists and has
+	 *   one. For a nameless property, as an optional fallback the ID
+	 *   can be returned (normalized as an ID) instead of an empty
+	 *   string.
+	 * - The label or an alias for a predefined ("special") property.
+	 *   The "main" label will be returned.
 	 * - A page name. It will be returned normalized, with spaces
 	 *   between words instead of underscores.
 	 * .
-	 * Before look-up, the ID is normalized. Whitespace is trimmed,
-	 * and the property namespace prefix is removed if present, before
-	 * the ID is considered. Both spaces and underscores are accepted
-	 * between words, and the first character is capitalized
-	 * if property page names are case-insensitive.
+	 * Before look-up, the property string is normalized. Whitespace
+	 * is trimmed, and the property namespace prefix is removed if
+	 * present. Both spaces and underscores are accepted between
+	 * words, and the first character is capitalized if property page
+	 * names are case-insensitive.
 	 *
-	 * For an invalid ID, as well as for a string that is empty or
-	 * only consists of whitespace, an empty string will be returned.
+	 * An empty string will be returned for:
+	 * - An invalid ID.
+	 * - An ID for a nameless predefined/special property, unless
+	 *   $getIdIfNameless is true.
+	 * - An empty string, or a string that only contains whitespace.
 	 *
 	 * @param string $id
 	 * @param boolean $getIdIfNameless
 	 * @return string The property name, or an empty string
 	 */
-	public static function getNameForId( $id, $getIdIfNameless = true ) {
-		$id = trim( $id );
-		$id = self::stripPropertyNamespace( $id );
-		if ( $id === '' ) {
+	public static function findName( $property, $getIdIfNameless = false ) {
+		$property = self::normalize( $property );
+		if ( $property === '' ) {
 			return '';
 		}
-		if ( $id[0] === '_' ) {
-			$id = str_replace( ' ', '_', $id );
-			$name = \SMWDIProperty::findPropertyLabel( $id );
-			if ( $name !== '' ) {
-				return $name;
+		if ( $property[0] === '_' ) {
+			$label = self::getLabelForId( $property );
+			if ( $label !== false ) {
+				return $label;
 			}
 			// No label found; optionally, if the ID is valid,
 			// return it as a fallback
-			if ( $getIdIfNameless === true &&
-					self::isValidPredefined( $id ) ) {
-				return $id;
+			if ( $getIdIfNameless === true && self::isValidPredefinedId( $property ) ) {
+				return $property;
 			}
 			// Invalid ID (or fallback not used)
 			return '';
 		}
-		$id = self::capitalizeName( $id );
-		return str_replace( '_', ' ', $id );
-	}
-
-	/**
-	 * Normalize the given property string representation.
-	 *
-	 * Whitespace is trimmed, and the property namespace prefix is
-	 * removed if present. Unless the name begins with an underscore,
-	 * underscores are turned into spaces, and the first character is
-	 * capitalized if property page names are case-insensitive. (If
-	 * the name begins with an underscore, spaces are instead replaced
-	 * by underscores following trimming and prefix removal.)
-	 *
-	 * @param string $nameOrId
-	 * @return string
-	 */
-	public static function normalize( $nameOrId ) {
-		$nameOrId = trim( $nameOrId );
-		$nameOrId = self::stripPropertyNamespace( $nameOrId );
-		if ( $nameOrId === '' ) {
-			return '';
+		// In case it is an alias for a label, do a label lookup
+		$id = self::getIdForLabelOrAlias( $property );
+		if ( $id !== false ) {
+			$label = self::getLabelForId( $id );
+			if ( $label !== false ) {
+				return $label;
+			}
 		}
-		if ( $nameOrId[0] === '_' ) {
-			return str_replace( ' ', '_', $nameOrId );
-		} else {
-			$nameOrId = self::capitalizeName( $nameOrId );
-			return str_replace( '_', ' ', $nameOrId );
-		}
-	}
-
-	/**
-	 * Make a SMWDIProperty instance for the given property name.
-	 *
-	 * Throws a PhpTags HookException if it is detected that the
-	 * property name is invalid.
-	 *
-	 * @param string $name The property name
-	 * @return \SMWDIProperty
-	 * @throws \PhpTags\HookException
-	 */
-	public static function makeDataItem( $name ) {
-		$id = self::getIdForName( $name );
-		try {
-			$dataItem = new \SMWDIProperty( $id );
-		} catch ( \SMWDataItemException $e ) {
-			$normName = self::normalize( $name );
-			$message = wfMessage( 'smw_noproperty', $normName )->inContentLanguage()->text();
-			throw new \PhpTags\HookException( \PhpTags\HookException::EXCEPTION_FATAL, $message );
-		}
-		return $dataItem;
+		// User-defined, i.e. a property page name
+		return $property;
 	}
 
 /*
  * PhpTags object
  */
 
+	public static function s_normalize( $property ) {
+		return self::normalize( $property );
+	}
+
+	public static function s_findId( $property ) {
+		return self::findId( $property );
+	}
+
+	public static function s_findName( $property, $getIdIfNameless = false ) {
+		return self::findName( $property, $getIdIfNameless );
+	}
+
+	/**
+	 * @deprecated Remove in v1.5.0
+	 */
 	public static function s_getIdForName( $name ) {
-		return self::getIdForName( $name );
+		return self::findId( $name );
 	}
 
+	/**
+	 * @deprecated Remove in v1.5.0
+	 */
 	public static function s_getNameForId( $id, $getIdIfNameless = true ) {
-		return self::getNameForId( $id, $getIdIfNameless );
-	}
-
-	public static function s_normalize( $nameOrId ) {
-		return self::normalize( $nameOrId );
+		return self::findName( $id, $getIdIfNameless );
 	}
 
 }
