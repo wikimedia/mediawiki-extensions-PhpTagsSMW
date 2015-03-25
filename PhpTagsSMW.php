@@ -16,7 +16,7 @@ if ( !defined('MEDIAWIKI') ) {
 	die( 'This file is an extension to MediaWiki and thus not a valid entry point.' );
 }
 
-const PHPTAGS_SMW_VERSION = '1.3.1';
+const PHPTAGS_SMW_VERSION = '1.4.0';
 
 // Register this extension on Special:Version
 $wgExtensionCredits['phptags'][] = array(
@@ -56,10 +56,10 @@ $wgHooks['ParserFirstCallInit'][] = function() {
  * @codeCoverageIgnore
  */
 $wgHooks['PhpTagsRuntimeFirstInit'][] = 'PhpTagsSMWHooks::onPhpTagsRuntimeFirstInit';
-$wgHooks['SMWStore::updateDataBefore'][] = 'PhpTagsSMWHooks::onSMWUpdateDataBefore';
 
 // Register classes for autoloading
 $wgAutoloadClasses['PhpTagsSMWHooks'] = __DIR__ . '/PhpTagsSMW.hooks.php';
+$wgAutoloadClasses['PhpTagsSMW\\InputConverter'] = __DIR__ . '/includes/InputConverter.php';
 
 $wgAutoloadClasses['PhpTagsObjects\\SMWExtArrays'] =
 	__DIR__ . '/includes/SMWExtArrays.php';
