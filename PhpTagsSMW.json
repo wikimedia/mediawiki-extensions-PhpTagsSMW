@@ -105,7 +105,7 @@
 						{ "type": "string", "name": "property" },
 						{ "type": "not object", "name": "value" }
 					],
-					"desc": "Add a value for a property to the current page. $value can be scalar, or an array of scalar|null (which is converted into a record value string)"
+					"desc": "Add a value for a property to the current page. $value can be scalar|null, or an array of scalar|null (which is converted into a record value string)"
 				},
 				"addValues": {
 					"parameters": [

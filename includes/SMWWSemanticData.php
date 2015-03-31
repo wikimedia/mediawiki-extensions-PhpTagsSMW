@@ -43,6 +43,9 @@ class SMWWSemanticData extends \PhpTags\GenericObject {
 				$parserData->getTitle() );
 		$diProperty = $converter->makeDIProperty( $property );
 		$valueString = $converter->makeValueString( $value );
+		if ( $valueString === '' ) {
+			return; // Don't store an empty value
+		}
 		$dataValue = $converter->makeDataValue( $diProperty, $valueString );
 		$parserData->addDataValue( $dataValue );
 		$parserData->pushSemanticDataToParserOutput();
@@ -69,10 +72,11 @@ class SMWWSemanticData extends \PhpTags\GenericObject {
 				$parserData->getTitle() );
 		$valueAssignments = $converter->makeValueAssignmentArray( $valueAssignments, $linkbackProperty );
 		$subobject = $converter->makeSubobject( $valueAssignments, $id );
-		if ( !$subobject->getSemanticData()->isEmpty() ) {
-			$parserData->getSemanticData()->addSubobject( $subobject );
-			$parserData->pushSemanticDataToParserOutput();
+		if ( $subobject->getSemanticData()->isEmpty() ) {
+			return; // Don't store an empty subobject
 		}
+		$parserData->getSemanticData()->addSubobject( $subobject );
+		$parserData->pushSemanticDataToParserOutput();
 	}
 
 }

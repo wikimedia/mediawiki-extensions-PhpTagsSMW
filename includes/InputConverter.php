@@ -106,23 +106,35 @@ class InputConverter {
 	}
 
 	/**
-	 * Convert a scalar value to a string compatible with DataValue
-	 * classes. Returns null if the value is not scalar.
+	 * Convert a scalar|null value to a string compatible with
+	 * DataValue classes. Returns null if the value is of a
+	 * different type.
 	 *
-	 * @param scalar $value
+	 * @note SMW does not normally assign empty strings to properties.
+	 * When returned, they should be checked for and ignored, except
+	 * when they occur for a record subvalue.
+	 *
+	 * @param scalar|null $value
 	 * @return string|null
 	 */
-	protected function convertScalar( $value ) {
+	protected function convertSingleValue( $value ) {
 		if ( is_string( $value ) ) {
-			return $value;
+			return trim( $value );
 		}
 		if ( is_bool( $value ) ) {
-			// recognized by SMWBoolValue
+			// Recognized by SMWBoolValue. Language
+			// independent and will also work if a
+			// property is actually of type Number
 			return $value ? "1" : "0";
 		}
 		if ( is_numeric( $value ) ) {
 			return (string) $value;
 		}
+		if ( $value === null ) {
+			// Represents an empty value
+			return '';
+		}
+		// Unsupported type
 		return null;
 	}
 
@@ -130,20 +142,25 @@ class InputConverter {
 	 * Turn user input for a property value into a value string which
 	 * can be used for making a DataValue.
 	 *
-	 * @param scalar|array $value Scalar or array of scalar|null
-	 * @param boolean $allowRecord
+	 * The input value can be either:
+	 * - A scalar, or null (which corresponds to '').
+	 * - An array of scalar|null subvalues, which is turned into a
+	 *   record value string.
+	 *
+	 * @note SMW does not normally assign empty strings to properties.
+	 * When returned, they should be checked for and ignored.
+	 *
+	 * @param scalar|null|array $value Value or array of subvalues
 	 * @return string
 	 * @throws \PhpTags\HookException
 	 */
-	public function makeValueString( $value, $allowRecord = true ) {
-		if ( $allowRecord === true && is_array( $value ) ) {
+	public function makeValueString( $value ) {
+		if ( is_array( $value ) ) {
 			$string = '';
 			foreach ( $value as $subvalue ) {
-				if ( $subvalue === null) {
-					// Allow null for blank value
-					$substring = '';
-				} elseif ( ( $substring = $this->convertScalar( $subvalue ) ) === null ) {
-					$message = 'property value must be scalar or array of scalar|null, array with entry of other type given';
+				$substring = $this->convertSingleValue( $subvalue );
+				if ( $substring === null ) {
+					$message = 'property value must be scalar|null or array of scalar|null, array with value of other type given';
 					throw $this->makeWarning( $message );
 				}
 				// Escape value separator before adding
@@ -156,11 +173,9 @@ class InputConverter {
 			}
 			return $string;
 		}
-		$string = $this->convertScalar( $value );
+		$string = $this->convertSingleValue( $value );
 		if ( $string === null ) {
-			$message = ( $allowRecord === true ) ?
-				'property value must be scalar or array of scalar|null, value given was neither scalar nor array' :
-				'property value must be scalar, non-scalar given';
+			$message = 'property value must be scalar|null or array of scalar|null, non-array value of other type given';
 			throw $this->makeWarning( $message );
 		}
 		return $string;
@@ -179,7 +194,8 @@ class InputConverter {
 	 *   list of independent values.
 	 * .
 	 * The output is an array of property => array( value string, ... )
-	 * entries.
+	 * entries. Values for which the value string was empty are
+	 * excluded.
 	 *
 	 * When used to get an array for making a subobject,
 	 * $linkbackProperty can be passed to add a named property holding
@@ -194,14 +210,17 @@ class InputConverter {
 		$array = array();
 		foreach ( $userArray as $key => $entry ) {
 			if ( !is_string( $key ) ) {
-				$message = 'value assignment array must contain entries with property string keys, array has entry with non-string key';
+				$message = 'value assignment array must contain entries with property string keys, array has value with non-string key';
 				throw $this->makeWarning( $message );
 			}
 			if ( !is_array( $entry ) ) {
 				$entry = array( $entry );
 			}
 			foreach ( $entry as $value ) {
-				$array[$key][] = $this->makeValueString( $value );
+				$valueString = $this->makeValueString( $value );
+				if ( $valueString !== '' ) {
+					$array[$key][] = $valueString;
+				}
 			}
 		}
 		$linkbackProperty = trim( $linkbackProperty );
@@ -219,6 +238,10 @@ class InputConverter {
 	 * If $id is not an empty string, it will be used to set the
 	 * identifier for the subobject. Otherwise, the identifier will
 	 * be set to a hash, the same way it is in SMW.
+	 *
+	 * @note As of SMW 2.2, empty subobjects are not normally assigned
+	 * to pages. Before storing a subobject, it should be checked if
+	 * its SemanticData is empty, and the subobject ignored if empty.
 	 *
 	 * @param array $valueAssignments
 	 * @param string $id Optional named identifier for subobject
