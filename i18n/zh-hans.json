@@ -4,7 +4,7 @@
 			"Liuxinyu970226"
 		]
 	},
-	"phptagssmw-desc": "用于[https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki 语义MediaWiki]相关数据访问的对象",
+	"phptagssmw-desc": "实现处理[https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki Semantic MediaWiki]数据的功能",
 	"phptagssmw-ext-arrays-not-installed": "需要[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays]扩展但未安装。",
 	"phptagssmw-ext-sqi-not-installed": "需要[https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface 语义查询界面]扩展但未安装。"
 }
