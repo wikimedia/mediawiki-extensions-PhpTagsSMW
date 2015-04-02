@@ -4,7 +4,7 @@
 			"Macofe"
 		]
 	},
-	"phptagssmw-desc": "Objectos para acceso de datos relacionados con [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki Semantic MediaWiki]",
+	"phptagssmw-desc": "Implementa funcionalidades para trabajar con datos de [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki Semantic MediaWiki]",
 	"phptagssmw-ext-arrays-not-installed": "Requiere la extensión [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays], pero no está instalada.",
 	"phptagssmw-ext-sqi-not-installed": "Requiere la extensión [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface], pero no está instalada."
 }
