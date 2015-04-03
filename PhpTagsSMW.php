@@ -16,7 +16,7 @@ if ( !defined('MEDIAWIKI') ) {
 	die( 'This file is an extension to MediaWiki and thus not a valid entry point.' );
 }
 
-const PHPTAGS_SMW_VERSION = '1.4.1';
+const PHPTAGS_SMW_VERSION = '1.4.2';
 
 // Register this extension on Special:Version
 $wgExtensionCredits['phptags'][] = array(
@@ -31,7 +31,6 @@ $wgExtensionCredits['phptags'][] = array(
 
 // Register message files
 $wgMessagesDirs['PhpTagsSMW'] = __DIR__ . '/i18n';
-$wgExtensionMessagesFiles['PhpTagsSMW'] = __DIR__ . '/PhpTagsSMW.i18n.php';
 
 // Register hooks
 
