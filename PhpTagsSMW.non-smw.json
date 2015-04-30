@@ -1,0 +1,41 @@
+{
+	"objects": {
+		"ExtArrays": {
+			"class": "SMWExtArrays",
+			"STATIC METHODS": {
+				"getArray": {
+					"parameters": [
+						{ "type": "string", "name": "arrayId" }
+					],
+					"return": "array",
+					"desc": "Returns the values of an array"
+				},
+				"getArrayValue": {
+					"parameters": [
+						{ "type": "string", "name": "arrayId" },
+						{ "type": "scalar", "name": "index" },
+						{ "type": "mixed", "name": "default", "default": "null" }
+					],
+					"return": "mixed",
+					"desc": "Returns the value of an array at position $index"
+				},
+				"unsetArray": {
+					"parameters": [
+						{ "type": "string", "name": "arrayId", "default": "" },
+						{ "type": "string", "name": "..." }
+					],
+					"return": "bool",
+					"desc": "This function will unset some or all defined arrays"
+				}
+			}
+		}
+	},
+	"constants": {
+		"PHPTAGS_SMW_VERSION": {
+			"desc": "The current version of the PhpTags SMW extension as a string",
+			"type": "string",
+			"example": "1.4.0",
+			"link": "https://www.mediawiki.org/wiki/Extension:PhpTags_SMW"
+		}
+	}
+}

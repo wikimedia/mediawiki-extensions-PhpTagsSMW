@@ -1,34 +1,5 @@
 {
 	"objects": {
-		"ExtArrays": {
-			"class": "SMWExtArrays",
-			"STATIC METHODS": {
-				"getArray": {
-					"parameters": [
-						{ "type": "string", "name": "arrayId" }
-					],
-					"return": "array",
-					"desc": "Returns the values of an array"
-				},
-				"getArrayValue": {
-					"parameters": [
-						{ "type": "string", "name": "arrayId" },
-						{ "type": "scalar", "name": "index" },
-						{ "type": "mixed", "name": "default", "default": "null" }
-					],
-					"return": "mixed",
-					"desc": "Returns the value of an array at position $index"
-				},
-				"unsetArray": {
-					"parameters": [
-						{ "type": "string", "name": "arrayId", "default": "" },
-						{ "type": "string", "name": "..." }
-					],
-					"return": "bool",
-					"desc": "This function will unset some or all defined arrays"
-				}
-			}
-		},
 		"ExtSQI": {
 			"class": "SMWExtSQI",
 			"METHODS": {
@@ -164,14 +135,54 @@
 					"desc": "Deprecated - use findName() instead."
 				}
 			}
+		},
+		"WSemanticStats": {
+			"class": "SMWWSemanticStats",
+			"CONSTANTS": {
+				"PROPERTY_VALUES": {
+					"type": "int",
+					"desc": "Number of property instances (value assignments) in the database"
+				},
+				"IMPROPER_VALUES": {
+					"type": "int",
+					"desc": "Number of property values that do not match the type or allowed values for the property"
+				},
+				"PROPERTIES_USED": {
+					"type": "int",
+					"desc": "Number of properties that have been assigned at least one value"
+				},
+				"PROPERTIES_WITH_PAGES": {
+					"type": "int",
+					"desc": "Number of properties with their own page"
+				},
+				"PROPERTIES_ASSIGNED_TYPES": {
+					"type": "int",
+					"desc": "Number of properties that have been declared (i.e. assigned a type)"
+				},
+				"SUBOBJECTS": {
+					"type": "int",
+					"desc": "Number of declared subobjects"
+				},
+				"QUERIES": {
+					"type": "int",
+					"desc": "Number of inline queries (using #ask or #show)"
+				},
+				"CONCEPTS": {
+					"type": "int",
+					"desc": "Number of declared concepts"
+				},
+				"DATATYPES": {
+					"type": "int",
+					"desc": "Number of available datatypes for properties"
+				}
+			}
 		}
 	},
 	"constants": {
-		"PHPTAGS_SMW_VERSION" : {
-			"desc": "The current version of the PhpTags SMW extension as a string",
+		"SMW_VERSION": {
+			"desc": "The SMW version as a string",
 			"type": "string",
-			"example": "1.4.0",
-			"link": "https://www.mediawiki.org/wiki/Extension:PhpTags_SMW"
+			"example": "2.1"
 		}
 	}
 }

@@ -16,7 +16,7 @@ if ( !defined('MEDIAWIKI') ) {
 	die( 'This file is an extension to MediaWiki and thus not a valid entry point.' );
 }
 
-const PHPTAGS_SMW_VERSION = '1.4.3';
+const PHPTAGS_SMW_VERSION = '1.5.0';
 
 // Register this extension on Special:Version
 $wgExtensionCredits['phptags'][] = array(
@@ -68,6 +68,8 @@ $wgAutoloadClasses['PhpTagsObjects\\SMWWSemanticData'] =
 	__DIR__ . '/includes/SMWWSemanticData.php';
 $wgAutoloadClasses['PhpTagsObjects\\SMWWSemanticProperty'] =
 	__DIR__ . '/includes/SMWWSemanticProperty.php';
+$wgAutoloadClasses['PhpTagsObjects\\SMWWSemanticStats'] =
+	__DIR__ . '/includes/SMWWSemanticStats.php';
 
 /**
  * Add files to phpunit test
