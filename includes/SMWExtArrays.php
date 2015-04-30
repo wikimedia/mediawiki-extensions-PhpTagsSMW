@@ -1,6 +1,8 @@
 <?php
 namespace PhpTagsObjects;
 
+use PhpTags\HookException;
+
 /**
  * Description of SMWextArray
  *
@@ -15,7 +17,7 @@ class SMWExtArrays extends \PhpTags\GenericObject {
 	 */
 	private static function getExtArrays () {
 		if ( true !== class_exists( 'ExtArrays', false ) ) {
-			throw new \PhpTags\HookException( \PhpTags\HookException::EXCEPTION_FATAL, wfMessage( 'phptagssmw-ext-arrays-not-installed' )->text() );
+			throw new HookException( wfMessage( 'phptagssmw-ext-arrays-not-installed' )->inContentLanguage()->text(), HookException::EXCEPTION_FATAL );
 		}
 		return \ExtArrays::get( \PhpTags\Runtime::$parser );
 	}

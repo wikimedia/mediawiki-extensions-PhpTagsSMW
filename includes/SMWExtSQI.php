@@ -1,6 +1,8 @@
 <?php
 namespace PhpTagsObjects;
 
+use PhpTags\HookException;
+
 /**
  * Description of SMWExtSQI
  *
@@ -10,7 +12,7 @@ class SMWExtSQI extends \PhpTags\GenericObject {
 
 	public function m___construct( $config = null ) {
 		if ( false === class_exists( '\\SQI\\SemanticQueryInterface' ) ) {
-			throw new \Exception( wfMessage( 'phptagssmw-ext-sqi-not-installed' )->text() );
+			throw new HookException( wfMessage( 'phptagssmw-ext-sqi-not-installed' )->inContentLanguage()->text(), HookException::EXCEPTION_FATAL );
 		}
 		$this->value = new \SQI\SemanticQueryInterface( $config );
 		return true;

@@ -49,7 +49,7 @@
 				},
 				"condition": {
 					"parameters": [
-						{ "type": "not object", "name": "condition" },
+						{ "type": "nonobject", "name": "condition" },
 						{ "type": "scalar", "name": "conditionValue", "default": "null" }
 					],
 					"return": "ExtSQI",
@@ -64,7 +64,7 @@
 				},
 				"printout": {
 					"parameters": [
-						{ "type": "not object", "name": "printout" }
+						{ "type": "nonobject", "name": "printout" }
 					],
 					"return": "ExtSQI",
 					"desc": "Adds property to be fetched and printed out, use * to print out all properties"
@@ -103,7 +103,7 @@
 				"addValue": {
 					"parameters": [
 						{ "type": "string", "name": "property" },
-						{ "type": "not object", "name": "value" }
+						{ "type": "nonobject", "name": "value" }
 					],
 					"desc": "Add a value for a property to the current page. $value can be scalar|null, or an array of scalar|null (which is converted into a record value string)"
 				},

@@ -1,7 +1,9 @@
 <?php
 namespace PhpTagsSMW;
 
-use \PhpTagsObjects\SMWWSemanticProperty as WSemanticProperty;
+use PhpTagsObjects\SMWWSemanticProperty as WSemanticProperty;
+
+use PhpTags\HookException;
 
 /**
  * Class for handling conversion of user input, with type and other
@@ -13,12 +15,6 @@ use \PhpTagsObjects\SMWWSemanticProperty as WSemanticProperty;
  * @licence GNU General Public Licence 2.0 or later
  */
 class InputConverter {
-
-	/**
-	 * Added as a prefix for exception messages.
-	 * @var string
-	 */
-	protected $callerName;
 
 	/**
 	 * Title instance for the page associated with the values being
@@ -35,19 +31,12 @@ class InputConverter {
 	protected $contextPage = null;
 
 	/**
-	 * Constructor. The caller name passed should correspond to what
-	 * is visible to (and was used by) the PhpTags user.
+	 * Constructor.
 	 *
-	 * @param string $callerName
 	 * @param \Title $title
 	 */
-	public function __construct( $callerName, \Title $title ) {
-		$this->callerName = $callerName;
+	public function __construct( \Title $title ) {
 		$this->title = $title;
-	}
-
-	protected function getCallerPrefix() {
-		return $this->callerName . ': ';
 	}
 
 	protected function getTitle() {
@@ -61,21 +50,16 @@ class InputConverter {
 		return $this->contextPage;
 	}
 
-	protected function makeWarning( $message ) {
-		$message = $this->getCallerPrefix() . $message;
-		return new \PhpTags\HookException( \PhpTags\HookException::EXCEPTION_WARNING, $message );
-	}
-
 	/**
 	 * Make a SMWDIProperty instance for a property given as a string.
 	 * The property string can be a property label, ID, or page name.
 	 *
-	 * Throws a \PhpTags\HookException warning if it is detected that
+	 * Throws a HookException warning if it is detected that
 	 * the property name is invalid.
 	 *
 	 * @param string $property Property label, ID, or page name
 	 * @return \SMWDIProperty
-	 * @throws \PhpTags\HookException
+	 * @throws HookException
 	 */
 	public function makeDIProperty( $property ) {
 		$id = WSemanticProperty::findId( $property );
@@ -83,8 +67,9 @@ class InputConverter {
 			$dataItem = new \SMWDIProperty( $id );
 		} catch ( \SMWDataItemException $e ) {
 			$printName = WSemanticProperty::normalize( $property );
-			$message = wfMessage( 'smw_noproperty', $printName )->inContentLanguage()->text();
-			throw $this->makeWarning( $message );
+			throw new HookException(
+				wfMessage( 'smw_noproperty', $printName )->inContentLanguage()->text()
+			);
 		}
 		return $dataItem;
 	}
@@ -152,7 +137,7 @@ class InputConverter {
 	 *
 	 * @param scalar|null|array $value Value or array of subvalues
 	 * @return string
-	 * @throws \PhpTags\HookException
+	 * @throws HookException
 	 */
 	public function makeValueString( $value ) {
 		if ( is_array( $value ) ) {
@@ -160,8 +145,9 @@ class InputConverter {
 			foreach ( $value as $subvalue ) {
 				$substring = $this->convertSingleValue( $subvalue );
 				if ( $substring === null ) {
-					$message = 'property value must be scalar|null or array of scalar|null, array with value of other type given';
-					throw $this->makeWarning( $message );
+					throw new HookException(
+						'property value must be scalar|null or array of scalar|null, array with value of other type given'
+					);
 				}
 				// Escape value separator before adding
 				$substring = str_replace( ';', '\;', $substring );
@@ -175,8 +161,9 @@ class InputConverter {
 		}
 		$string = $this->convertSingleValue( $value );
 		if ( $string === null ) {
-			$message = 'property value must be scalar|null or array of scalar|null, non-array value of other type given';
-			throw $this->makeWarning( $message );
+			throw new HookException(
+				'property value must be scalar|null or array of scalar|null, non-array value of other type given'
+			);
 		}
 		return $string;
 	}
@@ -204,14 +191,15 @@ class InputConverter {
 	 * @param array $userArray
 	 * @param string $linkbackProperty For use in subobjects
 	 * @return array Array of property => array( value string, ... )
-	 * @throws \PhpTags\HookException
+	 * @throws HookException
 	 */
 	public function makeValueAssignmentArray( $userArray, $linkbackProperty = '' ) {
 		$array = array();
 		foreach ( $userArray as $key => $entry ) {
 			if ( !is_string( $key ) ) {
-				$message = 'value assignment array must contain entries with property string keys, array has value with non-string key';
-				throw $this->makeWarning( $message );
+				throw new HookException(
+					'value assignment array must contain entries with property string keys, array has value with non-string key'
+				);
 			}
 			if ( !is_array( $entry ) ) {
 				$entry = array( $entry );
@@ -246,7 +234,7 @@ class InputConverter {
 	 * @param array $valueAssignments
 	 * @param string $id Optional named identifier for subobject
 	 * @return \SMW\Subobject
-	 * @throws \PhpTags\HookException
+	 * @throws HookException
 	 */
 	public function makeSubobject( $valueAssignments, $id = '' ) {
 		$subobject = new \SMW\Subobject( $this->getTitle() );

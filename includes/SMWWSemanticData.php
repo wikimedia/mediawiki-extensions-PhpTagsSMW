@@ -39,8 +39,7 @@ class SMWWSemanticData extends \PhpTags\GenericObject {
 
 	public static function s_addValue( $property, $value ) {
 		$parserData = self::getParserData();
-		$converter = new InputConverter( 'WSemanticData::addValue()',
-				$parserData->getTitle() );
+		$converter = new InputConverter( $parserData->getTitle() );
 		$diProperty = $converter->makeDIProperty( $property );
 		$valueString = $converter->makeValueString( $value );
 		if ( $valueString === '' ) {
@@ -53,8 +52,7 @@ class SMWWSemanticData extends \PhpTags\GenericObject {
 
 	public static function s_addValues( $valueAssignments ) {
 		$parserData = self::getParserData();
-		$converter = new InputConverter( 'WSemanticData::addValues()',
-				$parserData->getTitle() );
+		$converter = new InputConverter( $parserData->getTitle() );
 		$valueAssignments = $converter->makeValueAssignmentArray( $valueAssignments );
 		foreach ( $valueAssignments as $property => $values ) {
 			$diProperty = $converter->makeDIProperty( $property );
@@ -68,8 +66,7 @@ class SMWWSemanticData extends \PhpTags\GenericObject {
 
 	public static function s_addSubobject( $valueAssignments, $id = '', $linkbackProperty = '' ) {
 		$parserData = self::getParserData();
-		$converter = new InputConverter( 'WSemanticData::addSubobject()',
-				$parserData->getTitle() );
+		$converter = new InputConverter( $parserData->getTitle() );
 		$valueAssignments = $converter->makeValueAssignmentArray( $valueAssignments, $linkbackProperty );
 		$subobject = $converter->makeSubobject( $valueAssignments, $id );
 		if ( $subobject->getSemanticData()->isEmpty() ) {
