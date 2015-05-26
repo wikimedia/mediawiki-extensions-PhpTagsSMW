@@ -19,33 +19,9 @@ final class PhpTagsSMWHooks {
 	public static function onPhpTagsRuntimeFirstInit() {
 		\PhpTags\Hooks::addJsonFile( __DIR__ . '/PhpTagsSMW.non-smw.json' );
 		if ( defined( 'SMW_VERSION' ) ) {
-			global $wgCacheEpoch;
-
 			\PhpTags\Hooks::addJsonFile( __DIR__ . '/PhpTagsSMW.json' );
-			\PhpTags\Hooks::addCallbackConstantValues( 'PhpTagsSMWHooks::getSmwNsConstants', $wgCacheEpoch );
 		}
 		return true;
-	}
-
-	/**
-	 * When SMW is installed, called to add the SMW_NS_* constants.
-	 * The Semantic Forms SF_NS_* constants are also defined here.
-	 * Also check for and add other known semantic namespaces.
-	 *
-	 * @return int[] Array of '*_NS_*' => *_NS_* entries
-	 */
-	public static function getSmwNsConstants() {
-		global $smwgNamespaceIndex;
-
-		// SMW + Semantic Forms namespace indices
-		$nsConstants = \SMW\NamespaceManager::buildNamespaceIndex( $smwgNamespaceIndex );
-		// Semantic Drilldown namespace indices
-		if ( defined( 'SD_NS_FILTER' ) ) {
-			$nsConstants['SD_NS_FILTER'] = SD_NS_FILTER;
-			$nsConstants['SD_NS_FILTER_TALK'] = SD_NS_FILTER_TALK;
-		}
-
-		return $nsConstants;
 	}
 
 }
