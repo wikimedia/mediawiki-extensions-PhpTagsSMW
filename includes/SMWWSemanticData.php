@@ -27,7 +27,7 @@ class SMWWSemanticData extends \PhpTags\GenericObject {
 	 */
 	public static function getParserData() {
 		$applicationFactory = \SMW\ApplicationFactory::getInstance();
-		$parser = \PhpTags\Runtime::$parser;
+		$parser = \PhpTags\Renderer::getParser();
 		$parserData = $applicationFactory->newParserData(
 				$parser->getTitle(), $parser->getOutput() );
 		return $parserData;

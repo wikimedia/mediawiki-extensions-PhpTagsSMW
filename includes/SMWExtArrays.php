@@ -19,7 +19,7 @@ class SMWExtArrays extends \PhpTags\GenericObject {
 		if ( true !== class_exists( 'ExtArrays', false ) ) {
 			throw new HookException( wfMessage( 'phptagssmw-ext-arrays-not-installed' )->inContentLanguage()->text(), HookException::EXCEPTION_FATAL );
 		}
-		return \ExtArrays::get( \PhpTags\Runtime::$parser );
+		return \ExtArrays::get( \PhpTags\Renderer::getParser() );
 	}
 
 	public static function s_getArray( $arrayId ) {
