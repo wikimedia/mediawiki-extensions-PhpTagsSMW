@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ата"
+		]
+	},
+	"phptagssmw-desc": "Впроваджує функції для роботи з даними [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki Семантичної MediaWiki]",
+	"phptagssmw-ext-arrays-not-installed": "Потребує розширення [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays], але воно не встановлене.",
+	"phptagssmw-ext-sqi-not-installed": "Потребує розширення [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface], але воно не встановлене."
+}
