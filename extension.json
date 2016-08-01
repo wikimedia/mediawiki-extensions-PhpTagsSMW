@@ -1,0 +1,32 @@
+{
+	"name": "PhpTags SMW",
+	"version": "1.5.2",
+	"author": [
+		"[https://www.mediawiki.org/wiki/User:Pastakhov Pavel Astakhov]",
+		"[https://www.mediawiki.org/wiki/User:JoelKP Joel K. Pettersson]"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:PhpTags_SMW",
+	"descriptionmsg": "phptagssmw-desc",
+	"license-name": "GPL-2.0+",
+	"type": "phptags",
+	"MessagesDirs": {
+		"PhpTagsSMW": [
+			"i18n"
+		]
+	},
+	"AutoloadClasses": {
+		"PhpTagsSMWHooks": "PhpTagsSMW.hooks.php",
+		"PhpTagsSMW\\InputConverter": "includes/InputConverter.php",
+		"PhpTagsObjects\\SMWExtArrays": "includes/SMWExtArrays.php",
+		"PhpTagsObjects\\SMWExtSQI": "includes/SMWExtSQI.php",
+		"PhpTagsObjects\\SMWWSemanticData": "includes/SMWWSemanticData.php",
+		"PhpTagsObjects\\SMWWSemanticProperty": "includes/SMWWSemanticProperty.php",
+		"PhpTagsObjects\\SMWWSemanticStats": "includes/SMWWSemanticStats.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "PhpTagsSMWHooks::onParserFirstCallInit",
+		"PhpTagsRuntimeFirstInit": "PhpTagsSMWHooks::onPhpTagsRuntimeFirstInit",
+		"UnitTestsList": "PhpTagsSMWHooks::onUnitTestsList"
+	},
+	"manifest_version": 1
+}

@@ -11,16 +11,52 @@
 final class PhpTagsSMWHooks {
 
 	/**
+	 * Check on version compatibility
+	 * @return boolean
+	 */
+	public static function onParserFirstCallInit() {
+		$extRegistry = ExtensionRegistry::getInstance();
+		$phpTagsLoaded = $extRegistry->isLoaded( 'PhpTags' );
+		//if ( !$extRegistry->isLoaded( 'PhpTags' ) ) { use PHPTAGS_VERSION for backward compatibility
+		if ( !($phpTagsLoaded || defined( 'PHPTAGS_VERSION' )) ) {
+			throw new MWException( "\n\nYou need to have the PhpTags extension installed in order to use the PhpTags SMW extension." );
+		}
+		if ( $phpTagsLoaded ) {
+			$neededVersion = '5.8.0';
+			$phpTagsVersion = $extRegistry->getAllThings()['PhpTags']['version'];
+			if ( version_compare( $phpTagsVersion, $neededVersion, '<' ) ) {
+				throw new MWException( "\n\nThis version of the PhpTags SMW extension requires the PhpTags extension $neededVersion or above.\n You have $phpTagsVersion. Please update it." );
+			}
+		}
+		if ( !$phpTagsLoaded || PHPTAGS_HOOK_RELEASE != 8 ) {
+			throw new MWException( "\n\nThis version of the PhpTags SMW extension is outdated and not compatible with current version of the PhpTags extension.\n Please update it." );
+		}
+		return true;
+	}
+
+	/**
 	 * Called when the PhpTags runtime initializes for the first time.
 	 *
 	 * Used for initialization of things that are only used when
 	 * PhpTags is.
 	 */
 	public static function onPhpTagsRuntimeFirstInit() {
-		\PhpTags\Hooks::addJsonFile( __DIR__ . '/PhpTagsSMW.non-smw.json' );
+		$version = ExtensionRegistry::getInstance()->getAllThings()['PhpTags SMW']['version'];
+		\PhpTags\Hooks::addJsonFile( __DIR__ . '/PhpTagsSMW.non-smw.json', $version );
 		if ( defined( 'SMW_VERSION' ) ) {
-			\PhpTags\Hooks::addJsonFile( __DIR__ . '/PhpTagsSMW.json' );
+			\PhpTags\Hooks::addJsonFile( __DIR__ . '/PhpTagsSMW.json', $version . SMW_VERSION );
 		}
+		return true;
+	}
+
+	/**
+	 *
+	 * @param array $files
+	 * @return boolean
+	 */
+	public static function onUnitTestsList( &$files ) {
+		$testDir = __DIR__ . '/tests/phpunit';
+		$files = array_merge( $files, glob( "$testDir/*Test.php" ) );
 		return true;
 	}
 

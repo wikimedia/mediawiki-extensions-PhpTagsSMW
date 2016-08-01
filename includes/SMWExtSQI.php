@@ -10,6 +10,14 @@ use PhpTags\HookException;
  */
 class SMWExtSQI extends \PhpTags\GenericObject {
 
+	public static function getConstantValue( $constantName ) {
+		switch ( $constantName ) {
+			case 'PHPTAGS_SMW_VERSION':
+				return \ExtensionRegistry::getInstance()->getAllThings()['PhpTags SMW']['version'];
+		}
+		parent::getConstantValue( $constantName );
+	}
+
 	public function m___construct( $config = null ) {
 		if ( false === class_exists( '\\SQI\\SemanticQueryInterface' ) ) {
 			throw new HookException( wfMessage( 'phptagssmw-ext-sqi-not-installed' )->inContentLanguage()->text(), HookException::EXCEPTION_FATAL );

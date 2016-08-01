@@ -33,6 +33,7 @@
 	"constants": {
 		"PHPTAGS_SMW_VERSION": {
 			"desc": "The current version of the PhpTags SMW extension as a string",
+			"class": "SMWExtSQI",
 			"type": "string",
 			"example": "1.4.0",
 			"link": "https://www.mediawiki.org/wiki/Extension:PhpTags_SMW"
