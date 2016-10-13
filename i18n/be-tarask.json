@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Red Winged Duck"
+		]
+	},
+	"phptagssmw-desc": "Рэалізуе функцыі для працы зь зьвесткамі [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki Semantic MediaWiki]",
+	"phptagssmw-ext-arrays-not-installed": "Патрабуецца пашырэньне [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays], але яно не ўсталяванае"
+}
