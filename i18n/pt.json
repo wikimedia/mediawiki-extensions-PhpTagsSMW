@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vitorvicentevalente"
+			"Vitorvicentevalente",
+			"Hamilton Abreu"
 		]
 	},
-	"phptagssmw-ext-arrays-not-installed": "Requer a extensão [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays], mas não está instalada.",
-	"phptagssmw-ext-sqi-not-installed": "Requer a extensão [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface], mas não está instalada."
+	"phptagssmw-desc": "Implementa funcionalidades para trabalhar com dados do [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki MediaWiki Semântico]",
+	"phptagssmw-ext-arrays-not-installed": "Requer a extensão [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays], mas esta não está instalada.",
+	"phptagssmw-ext-sqi-not-installed": "Requer a extensão [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface], mas esta não está instalada."
 }
