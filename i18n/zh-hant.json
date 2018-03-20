@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly"
+		]
+	},
+	"phptagssmw-desc": "用於以 [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki Semantic MediaWiki] 資料運作的實行功能",
+	"phptagssmw-ext-arrays-not-installed": "所需的 [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays] 擴充功能尚未安裝。",
+	"phptagssmw-ext-sqi-not-installed": "所需的 [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface] 擴充功能尚未安裝。"
+}
