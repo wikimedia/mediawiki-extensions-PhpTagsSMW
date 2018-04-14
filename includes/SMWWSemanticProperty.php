@@ -8,7 +8,7 @@ namespace PhpTagsObjects;
  * @file SMWWSemanticProperty.php
  * @ingroup PhpTagsSMW
  * @author Joel K. Pettersson <joelkpettersson@gmail.com>
- * @licence GNU General Public Licence 2.0 or later
+ * @license GPL-2.0-or-later
  */
 class SMWWSemanticProperty extends \PhpTags\GenericObject {
 
@@ -19,12 +19,12 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 *
 	 * @var array $extraAliases Array of string => string entries
 	 */
-	private static $extraAliases = array(
+	private static $extraAliases = [
 		// Recognized by SMW's #subobject parser function. In
 		// PhpTags SMW, simply recognize it universally instead of
 		// making subobjects a special case.
 		'@sortkey' => '_SKEY'
-	);
+	];
 
 	/**
 	 * Remove the property namespace prefix if present in the given
@@ -139,7 +139,7 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 * valid. The string must be normalized.
 	 *
 	 * @param string $id Normalized predefined/special property ID
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function isValidPredefinedId( $id ) {
 		$registry = \SMW\PropertyRegistry::getInstance();
@@ -218,7 +218,7 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 * - An empty string, or a string that only contains whitespace.
 	 *
 	 * @param string $id
-	 * @param boolean $getIdIfNameless
+	 * @param bool $getIdIfNameless
 	 * @return string The property name, or an empty string
 	 */
 	public static function findName( $property, $getIdIfNameless = false ) {

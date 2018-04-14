@@ -13,7 +13,7 @@ use SMW\DataTypeRegistry;
  * @file SMWWSemanticStats.php
  * @ingroup PhpTagsSMW
  * @author Joel K. Pettersson <joelkpettersson@gmail.com>
- * @licence GNU General Public Licence 2.0 or later
+ * @license GPL-2.0-or-later
  */
 class SMWWSemanticStats extends GenericObject {
 

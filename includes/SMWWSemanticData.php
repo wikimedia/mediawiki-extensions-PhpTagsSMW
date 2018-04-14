@@ -14,7 +14,7 @@ use \PhpTagsSMW\InputConverter;
  * @file SMWWSemanticData.php
  * @ingroup PhpTagsSMW
  * @author Joel K. Pettersson <joelkpettersson@gmail.com>
- * @licence GNU General Public Licence 2.0 or later
+ * @license GPL-2.0-or-later
  */
 class SMWWSemanticData extends \PhpTags\GenericObject {
 

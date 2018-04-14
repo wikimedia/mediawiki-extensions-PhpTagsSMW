@@ -6,19 +6,19 @@
  * @file PhpTagsSMW.hooks.php
  * @ingroup PhpTagsSMW
  * @author Joel K. Pettersson <joelkpettersson@gmail.com>
- * @licence GNU General Public Licence 2.0 or later
+ * @license GPL-2.0-or-later
  */
 final class PhpTagsSMWHooks {
 
 	/**
 	 * Check on version compatibility
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onParserFirstCallInit() {
 		$extRegistry = ExtensionRegistry::getInstance();
 		$phpTagsLoaded = $extRegistry->isLoaded( 'PhpTags' );
-		//if ( !$extRegistry->isLoaded( 'PhpTags' ) ) { use PHPTAGS_VERSION for backward compatibility
-		if ( !($phpTagsLoaded || defined( 'PHPTAGS_VERSION' )) ) {
+		// if ( !$extRegistry->isLoaded( 'PhpTags' ) ) { use PHPTAGS_VERSION for backward compatibility
+		if ( !( $phpTagsLoaded || defined( 'PHPTAGS_VERSION' ) ) ) {
 			throw new MWException( "\n\nYou need to have the PhpTags extension installed in order to use the PhpTags SMW extension." );
 		}
 		if ( $phpTagsLoaded ) {
@@ -52,7 +52,7 @@ final class PhpTagsSMWHooks {
 	/**
 	 *
 	 * @param array $files
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function onUnitTestsList( &$files ) {
 		$testDir = __DIR__ . '/tests/phpunit';

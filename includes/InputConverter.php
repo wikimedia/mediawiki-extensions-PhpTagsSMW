@@ -12,7 +12,7 @@ use PhpTags\HookException;
  * @file InputConverter.php
  * @ingroup PhpTagsSMW
  * @author Joel K. Pettersson <joelkpettersson@gmail.com>
- * @licence GNU General Public Licence 2.0 or later
+ * @license GPL-2.0-or-later
  */
 class InputConverter {
 
@@ -113,7 +113,7 @@ class InputConverter {
 			return $value ? "1" : "0";
 		}
 		if ( is_numeric( $value ) ) {
-			return (string) $value;
+			return (string)$value;
 		}
 		if ( $value === null ) {
 			// Represents an empty value
@@ -194,7 +194,7 @@ class InputConverter {
 	 * @throws HookException
 	 */
 	public function makeValueAssignmentArray( $userArray, $linkbackProperty = '' ) {
-		$array = array();
+		$array = [];
 		foreach ( $userArray as $key => $entry ) {
 			if ( !is_string( $key ) ) {
 				throw new HookException(
@@ -202,7 +202,7 @@ class InputConverter {
 				);
 			}
 			if ( !is_array( $entry ) ) {
-				$entry = array( $entry );
+				$entry = [ $entry ];
 			}
 			foreach ( $entry as $value ) {
 				$valueString = $this->makeValueString( $value );
