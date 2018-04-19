@@ -25,8 +25,7 @@
 	},
 	"Hooks": {
 		"ParserFirstCallInit": "PhpTagsSMWHooks::onParserFirstCallInit",
-		"PhpTagsRuntimeFirstInit": "PhpTagsSMWHooks::onPhpTagsRuntimeFirstInit",
-		"UnitTestsList": "PhpTagsSMWHooks::onUnitTestsList"
+		"PhpTagsRuntimeFirstInit": "PhpTagsSMWHooks::onPhpTagsRuntimeFirstInit"
 	},
 	"manifest_version": 1
 }
