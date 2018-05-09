@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"ديفيد"
+		]
+	},
+	"phptagssmw-desc": "ينفذ ميزات للعمل مع بيانات [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki ميدياويكي الدلالي]",
+	"phptagssmw-ext-arrays-not-installed": "يتطلب الامتداد [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays]، ولكنه غير مثبت.",
+	"phptagssmw-ext-sqi-not-installed": "يتطلب الامتداد [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Infaceface Semantic Query]، ولكنه غير مثبت."
+}
