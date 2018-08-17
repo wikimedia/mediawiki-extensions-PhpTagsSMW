@@ -36,12 +36,12 @@ class SMWExtArrays extends \PhpTags\GenericObject {
 			$extArrays->mArrays = [];
 			return true;
 		}
-		$retrun = true;
+		$return = true;
 		$args = func_get_args();
 		foreach ( $args as $arrayId ) {
-			$retrun &= $extArrays->unsetArray( $arrayId );
+			$return &= $extArrays->unsetArray( $arrayId );
 		}
-		return $retrun;
+		return $return;
 	}
 
 }
