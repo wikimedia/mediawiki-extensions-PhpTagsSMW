@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"phptagssmw-desc": "'Mblemende funziune pe fatià cu [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki MediaUicchi Semandeche]",
+	"phptagssmw-ext-arrays-not-installed": "Vole l'estenzione [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays], ma non ge ste installate.",
+	"phptagssmw-ext-sqi-not-installed": "Vole l'estenzione [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface], ma non ge ste installate."
+}
