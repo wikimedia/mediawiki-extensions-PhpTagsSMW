@@ -68,8 +68,39 @@ class SMWExtSQI extends \PhpTags\GenericObject {
 		return $this->getSQI()->count();
 	}
 
+	public function m_sort( $sortProperty, $direction = 'ASC' ) {
+		$this->getSQI()->sort( $sortProperty, $direction );
+		return $this;
+	}
+
 	public function m_toArray( $stringifyPropValues = false ) {
-		return $this->getSQI()->toArray( (bool)$stringifyPropValues );
+		$return = $this->getSQI()->toArray( (bool)$stringifyPropValues );
+		foreach ( $return as &$value ) {
+			$title = $value['title'] ?? null;
+			if ( $title instanceof \Title ) {
+				$value['title'] = self::getPhpTagsTitle( $title );
+			}
+			$properties = $value['properties'] ?? [];
+			foreach ( $properties as &$propValue ) {
+				if ( $propValue instanceof \Title ) {
+					$propValue = self::getPhpTagsTitle( $propValue );
+				}
+			}
+		}
+		return $return;
+	}
+
+	/**
+	 * Returns PhpTags WTitle object if possible or Full text of the title
+	 * @param \Title $title
+	 * @return \PhpTags\GenericObject|string
+	 */
+	private static function getPhpTagsTitle( \Title $title ) {
+		try {
+			return \PhpTags\Hooks::getObjectWithValue( 'WTitle', $title );
+		} catch ( \PhpTags\PhpTagsException $ex ) {
+			return $title->getFullText();
+		}
 	}
 
 }

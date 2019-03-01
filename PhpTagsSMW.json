@@ -59,6 +59,14 @@
 					"return": "int",
 					"desc": "Counts query results"
 				},
+				"sort": {
+					"parameters": [
+						{ "type": "string", "name": "sortProperty" },
+						{ "type": "string", "name": "direction", "default": "ASC" }
+					],
+					"return": "ExtSQI",
+					"desc": "Set query sorting subject property"
+				},
 				"toArray": {
 					"parameters": [
 						{ "type": "bool", "name": "stringifyPropValues", "default": "false" }
