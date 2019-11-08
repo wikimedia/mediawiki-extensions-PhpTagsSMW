@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"phptagssmw-desc": "Implementerer funksjoner for å jobbe med data fra [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki Semantic MediaWiki]",
+	"phptagssmw-ext-arrays-not-installed": "Krever utvidelsen [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays], men den er ikke installert.",
+	"phptagssmw-ext-sqi-not-installed": "Krever utvidelsen [https://www.mediawiki.org/wiki/User:Vedmake/Semantic_Query_Interface Semantic Query Interface], men den er ikke installert."
+}
