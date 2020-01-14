@@ -1,9 +1,8 @@
 <?php
 namespace PhpTagsSMW;
 
-use PhpTagsObjects\SMWWSemanticProperty as WSemanticProperty;
-
 use PhpTags\HookException;
+use PhpTagsObjects\SMWWSemanticProperty as WSemanticProperty;
 
 /**
  * Class for handling conversion of user input, with type and other
