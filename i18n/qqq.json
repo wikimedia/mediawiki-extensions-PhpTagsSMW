@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"pastakhov",
 			"Raymond",
-			"Umherirrender"
+			"Umherirrender",
+			"pastakhov"
 		]
 	},
 	"phptagssmw-desc": "{{desc|name=PhpTags SMW|url=https://www.mediawiki.org/wiki/Extension:PhpTags_SMW}}",

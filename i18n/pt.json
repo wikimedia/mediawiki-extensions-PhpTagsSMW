@@ -1,8 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vitorvicentevalente",
-			"Hamilton Abreu"
+			"Hamilton Abreu",
+			"Vitorvicentevalente"
 		]
 	},
 	"phptagssmw-desc": "Implementa funcionalidades para trabalhar com dados do [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki MediaWiki Semântico]",
