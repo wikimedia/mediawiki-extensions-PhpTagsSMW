@@ -1,7 +1,7 @@
 <?php
 namespace PhpTagsObjects;
 
-use \PhpTagsSMW\InputConverter;
+use PhpTagsSMW\InputConverter;
 
 /**
  * Class with static methods for affecting how semantic data is handled
