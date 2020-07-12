@@ -122,8 +122,8 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 * Return property label for a normalized predefined/special
 	 * property ID. If none is found, false will be returned.
 	 *
-	 * @param string $name Normalized property label or alias
-	 * @return string|false The property ID, or false
+	 * @param string $id Normalized property id
+	 * @return string|false The property label, or false
 	 */
 	public static function getLabelForId( $id ) {
 		$registry = \SMW\PropertyRegistry::getInstance();
@@ -168,7 +168,7 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 * For a string that is empty or only consists of whitespace, an
 	 * empty string will be returned.
 	 *
-	 * @param string $name
+	 * @param string $property
 	 * @return string The property ID, or an empty string
 	 */
 	public static function findId( $property ) {
@@ -217,7 +217,7 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 *   $getIdIfNameless is true.
 	 * - An empty string, or a string that only contains whitespace.
 	 *
-	 * @param string $id
+	 * @param string $property
 	 * @param bool $getIdIfNameless
 	 * @return string The property name, or an empty string
 	 */

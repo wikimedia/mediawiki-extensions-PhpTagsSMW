@@ -39,6 +39,7 @@ final class PhpTagsSMWHooks {
 	 *
 	 * Used for initialization of things that are only used when
 	 * PhpTags is.
+	 * @return true
 	 */
 	public static function onPhpTagsRuntimeFirstInit() {
 		$version = ExtensionRegistry::getInstance()->getAllThings()['PhpTags SMW']['version'];
