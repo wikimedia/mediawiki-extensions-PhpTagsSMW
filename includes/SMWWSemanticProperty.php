@@ -1,6 +1,8 @@
 <?php
 namespace PhpTagsObjects;
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Static methods for dealing with properties, their representations,
  * and basic data access for individual properties and property values.
@@ -35,8 +37,6 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 * @return string
 	 */
 	private static function stripPropertyNamespace( $name ) {
-		global $wgContLang;
-
 		$colonPos = strpos( $name, ':' );
 		if ( $colonPos === false ) {
 			// Nothing to do
@@ -44,7 +44,7 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 		}
 		$prefix = substr( $name, 0, $colonPos );
 		$prefix = str_replace( ' ', '_', $prefix );
-		$nsIndex = $wgContLang->getNsIndex( $prefix );
+		$nsIndex = MediaWikiServices::getInstance()->getContentLanguage()->getNsIndex( $prefix );
 		if ( $nsIndex === SMW_NS_PROPERTY ) {
 			$name = substr( $name, $colonPos + 1 );
 			return ( $name !== false ) ? $name : '';
@@ -61,10 +61,8 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 * @return string
 	 */
 	private static function capitalizeName( $name ) {
-		global $wgContLang;
-
 		if ( \MWNamespace::isCapitalized( SMW_NS_PROPERTY ) ) {
-			$name = $wgContLang->ucfirst( $name );
+			$name = MediaWikiServices::getInstance()->getContentLanguage()->ucfirst( $name );
 		}
 		return $name;
 	}
