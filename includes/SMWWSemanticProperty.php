@@ -19,7 +19,7 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 * are only used when looking up IDs - they are not used as labels
 	 * when looking up names.)
 	 *
-	 * @var array $extraAliases Array of string => string entries
+	 * @var array Array of string => string entries
 	 */
 	private static $extraAliases = [
 		// Recognized by SMW's #subobject parser function. In
