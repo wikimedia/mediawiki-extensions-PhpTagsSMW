@@ -61,7 +61,7 @@ class SMWWSemanticProperty extends \PhpTags\GenericObject {
 	 * @return string
 	 */
 	private static function capitalizeName( $name ) {
-		if ( \MWNamespace::isCapitalized( SMW_NS_PROPERTY ) ) {
+		if ( MediaWikiServices::getInstance()->getNamespaceInfo()->isCapitalized( SMW_NS_PROPERTY ) ) {
 			$name = MediaWikiServices::getInstance()->getContentLanguage()->ucfirst( $name );
 		}
 		return $name;
