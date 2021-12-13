@@ -1,10 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Alirezaaa"
+			"Alirezaaa",
+			"Jeeputer"
 		]
 	},
-	"phptagssmw-desc": "اشیاء برای دسترسی داده‌های مرتبط با [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki سمنتیک مدیاویکی]",
+	"phptagssmw-desc": "ویژگی‌هایی را برای کار با داده‌های مرتبط با [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki سمنتیک مدیاویکی] را پیاده‌سازی می‌کند",
 	"phptagssmw-ext-arrays-not-installed": "افزونه [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays آرایه‌ها] لازم است، اما نصب نیست.",
 	"phptagssmw-ext-sqi-not-installed": "افزونه [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface] لازم است، اما نصب نیست."
 }
