@@ -1,4 +1,5 @@
 {
+	"name": "PhpTagsSMW",
 	"private": true,
 	"scripts": {
 		"test": "grunt test"
