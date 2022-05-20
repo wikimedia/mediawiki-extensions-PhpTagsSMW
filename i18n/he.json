@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"Guycn2"
 		]
 	},
+	"phptagssmw-desc": "מימוש אפשרויות לעבודה עם נתוני [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki מדיה־ויקי סמנטית]",
 	"phptagssmw-ext-arrays-not-installed": "הרחבת ה[https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays מערכים] נדרשת, אך היא אינה מותקנת.",
 	"phptagssmw-ext-sqi-not-installed": "הרחבת ה[https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface שאילתת הממשק הסימנטית] נדרשת, אך היא אינה מותקנת."
 }
