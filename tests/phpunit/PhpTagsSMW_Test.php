@@ -1,6 +1,9 @@
 <?php
 namespace PhpTags;
 
+/**
+ * @covers \PhpTags\SMWExtSQI
+ */
 class PhpTagsSMW_Test extends \PHPUnit\Framework\TestCase {
 
 	public function testRun_constant_1() {
