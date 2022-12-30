@@ -3,7 +3,6 @@ namespace PhpTagsObjects;
 
 use PhpTags\GenericObject;
 use PhpTags\HookException;
-
 use SMW\ApplicationFactory;
 use SMW\DataTypeRegistry;
 
