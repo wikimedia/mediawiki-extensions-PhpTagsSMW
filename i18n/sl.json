@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"phptagssmw-desc": "Implementira možnosti za delo s podatki [https://www.semantic-mediawiki.org/wiki/Semantic_MediaWiki Semantičnega MediaWikija]",
+	"phptagssmw-ext-arrays-not-installed": "Zahteva razširitev [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays], ki pa ni nameščena.",
+	"phptagssmw-ext-sqi-not-installed": "Zahteva razširitev [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface], ki pa ni nameščena."
+}
