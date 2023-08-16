@@ -1,0 +1,9 @@
+{
+	"@metadata": {
+		"authors": [
+			"Nokeoo"
+		]
+	},
+	"phptagssmw-ext-arrays-not-installed": "Reikalingas [https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:Arrays Arrays] plėtinys, bet jis neįdiegtas.",
+	"phptagssmw-ext-sqi-not-installed": "Reikalingas [https://www.mediawiki.org/wiki/User:Vedmaka/Semantic_Query_Interface Semantic Query Interface] plėtinys, bet jis neįdiegtas."
+}
